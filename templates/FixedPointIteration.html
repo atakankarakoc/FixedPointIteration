@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <div class="row row-centered">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Summary</h3>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="text-muted">Function</span>
+                            <span class="value">x^2-2</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="text-muted">Python Function</span>
+                            <span class="value">x**2 - 2</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="text-muted">Lower Bound</span>
+                            <span class="value">None</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="text-muted">Upper Bound</span>
+                            <span class="value">None</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="text-muted">Initial Guess</span>
+                            <span class="value">5</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="text-muted">Second Initial Guess</span>
+                            <span class="value">None</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="text-muted">Tolerance</span>
+                            <span class="value">1.E-06</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="text-muted">Iteration Limit</span>
+                            <span class="value">100</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="text-muted">Root</span>
+                            <span class="value">1.4142135857968836</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="text-muted">Iteration Count</span>
+                            <span class="value">5</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="text-muted">Error</span>
+                            <span class="value">6.625247950253765e-08</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="text-muted">Condition</span>
+                            <span class="value">True</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="text-muted">Final X Prev</span>
+                            <span class="value">1.414470981367771</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="text-muted">Final X</span>
+                            <span class="value">1.4142135857968836</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="text-muted">Final F Prime(X Prev)</span>
+                            <span class="value">2.828941962735542</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="text-muted">Final F(X Prev)</span>
+                            <span class="value">0.0007281571315052027</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="text-muted">Final F(X)</span>
+                            <span class="value">6.625247950253765e-08</span>
+                        </li>
+                    </ul>
+                    <div id="RootFinder-Plot" style="width: 100%; height: 400px;"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3>Iterations</h3>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Find the tangent line of the function at the initial guess</li>
+                    </ul>
+                    <hr>
+                    <p>
+                        <mark>
+                            Iteration 1 of 5 with 5.0
+                            <br>&downarrow;<br>
+                            x<sub>0</sub> = 5.0
+                            <br>
+                            f(x<sub>0</sub>) = f(5.0) = 23.0
+                            <br>
+                            f'(x<sub>0</sub>) = f'(5.0) = 10.0
+                            <br>
+                            x<sub>1</sub> = x<sub>0</sub> - f(x<sub>0</sub>) / f'(x<sub>0</sub>)
+                            <br>
+                            x<sub>1</sub> = 5.0 - 23.0 / 10.0
+                            <br>
+                            x<sub>1</sub> = 2.7
+                            <br>&downarrow;<br>
+                            |f(x<sub>1</sub>)| = |5.29| > 1.E-06 = Tolerance
+                            <br>
+                            |x<sub>1</sub> - x<sub>0</sub>| = |2.7 - 5.0| > 1.E-06 = Tolerance
+                        </mark>
+                    </p>
+                    <hr>
+                    
+                    <p>
+                        <mark>
+                            Iteration 2 of 5 with 2.7
+                            <br>&downarrow;<br>
+                            x<sub>1</sub> = 2.7
+                            <br>
+                            f(x<sub>1</sub>) = f(2.7) = 5.29
+                            <br>
+                            f'(x<sub>1</sub>) = f'(2.7) = 5.4
+                            <br>
+                            x<sub>2</sub> = x<sub>1</sub> - f(x<sub>1</sub>) / f'(x<sub>1</sub>)
+                            <br>
+                            x<sub>2</sub> = 2.7 - 5.29 / 5.4
+                            <br>
+                            x<sub>2</sub> = 1.72037
+                            <br>&downarrow;<br>
+                            |f(x<sub>2</sub>)| = |0.959674| > 1.E-06 = Tolerance
+                            <br>
+                            |x<sub>2</sub> - x<sub>1</sub>| = |1.72037 - 2.7| > 1.E-06 = Tolerance
+                        </mark>
+                    </p>
+                    <hr>
+                    
+                    <p>
+                        <mark>
+                            Iteration 3 of 5 with 1.72037
+                            <br>&downarrow;<br>
+                            x<sub>2</sub> = 1.72037
+                            <br>
+                            f(x<sub>2</sub>) = f(1.72037) = 0.959674
+                            <br>
+                            f'(x<sub>2</sub>) = f'(1.72037) = 3.440741
+                            <br>
+                            x<sub>3</sub> = x<sub>2</sub> - f(x<sub>2</sub>) / f'(x<sub>2</sub>)
+                            <br>
+                            x<sub>3</sub> = 1.72037 - 0.959674 / 3.440741
+                            <br>
+                            x<sub>3</sub> = 1.441455
+                            <br>&downarrow;<br>
+                            |f(x<sub>3</sub>)| = |0.077794| > 1.E-06 = Tolerance
+                            <br>
+                            |x<sub>3</sub> - x<sub>2</sub>| = |1.441455 - 1.72037| > 1.E-06 = Tolerance
+                        </mark>
+                    </p>
+                    <hr>
+                    
+                    <p>
+                        <mark>
+                            Iteration 4 of 5 with 1.441455
+                            <br>&downarrow;<br>
+                            x<sub>3</sub> = 1.441455
+                            <br>
+                            f(x<sub>3</sub>) = f(1.441455) = 0.077794
+                            <br>
+                            f'(x<sub>3</sub>) = f'(1.441455) = 2.882911
+                            <br>
+                            x<sub>4</sub> = x<sub>3</sub> - f(x<sub>3</sub>) / f'(x<sub>3</sub>)
+                            <br>
+                            x<sub>4</sub> = 1.441455 - 0.077794 / 2.882911
+                            <br>
+                            x<sub>4</sub> = 1.414471
+                            <br>&downarrow;<br>
+                            |f(x<sub>4</sub>)| = |0.000728| > 1.E-06 = Tolerance
+                            <br>
+                            |x<sub>4</sub> - x<sub>3</sub>| = |1.414471 - 1.441455| > 1.E-06 = Tolerance
+                        </mark>
+                    </p>
+                    <hr>
+                    
+                    <p>
+                        <mark>
+                            Iteration 5 of 5 with 1.414471
+                            <br>&downarrow;<br>
+                            x<sub>4</sub> = 1.414471
+                            <br>
+                            f(x<sub>4</sub>) = f(1.414471) = 0.000728
+                            <br>
+                            f'(x<sub>4</sub>) = f'(1.414471) = 2.828942
+                            <br>
+                            x<sub>5</sub> = x<sub>4</sub> - f(x<sub>4</sub>) / f'(x<sub>4</sub>)
+                            <br>
+                            x<sub>5</sub> = 1.414471 - 0.000728 / 2.828942
+                            <br>
+                            x<sub>5</sub> = 1.414214
+                            <br>&downarrow;<br>
+                            |f(x<sub>5</sub>)| = |0.0| &le; 1.E-06 = Tolerance
+                            <br>
+                            |x<sub>5</sub> - x<sub>4</sub>| = |1.414214 - 1.414471| &le; 1.E-06 = Tolerance
+                            <br>&downarrow;<br>
+                            Root = 1.4142135857968836
+                            <br>
+                            Error = &plusmn; 6.625247950253765e-08
+                        </mark>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <script src="/static/script.js"></script>
+    </body>
+</html>
