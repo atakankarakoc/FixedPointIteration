@@ -1,4 +1,4 @@
-document.getElementById("findroot").addEventListener("click", function submitForm() {
+document.getElementById("findroot").addEventListener("click", function(){
     var fetchData = {
         fx: document.getElementById('FPIFunc').value,
         x0: document.getElementById('FPIInitial').value,
@@ -16,10 +16,13 @@ document.getElementById("findroot").addEventListener("click", function submitFor
         body: data
     })
         .then(response => response.json())
-        .then(data => {
-          document.getElementById("inputDiv").style.display = "none";
-          document.getElementById("resultDiv").style.display = "block";
-
+        // .then(data => {
+        //   document.getElementById("inputDiv").style.display = "none";
+        //   document.getElementById("resultDiv").style.display = "block";
+        //
+        // })
+        .then(data =>{
+            console.log(data)
         })
         .catch(error => {
             console.error('Error:', error);
