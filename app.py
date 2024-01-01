@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import render_template
 from flask import request, jsonify
+from sympy import *
 
 app = Flask(__name__)
 
@@ -10,7 +11,7 @@ def index():
     return render_template("index.html",
                            title="Fixed Point Iteration")
 
-@app.route('/FixedPointIteration', methods = ['POST'])
+@app.route('/FixedPointIteration', methods = ['POST', "GET"])
 def FPI():
     if request.is_json:
         data = request.get_json()
@@ -18,8 +19,9 @@ def FPI():
         x0 = data.get("x0")
         tol = data.get("tol")
         max_iter = data.get("max_iter")
+        pythonfunc = sympify(fx)
         response_data = {
-            "fx": fx,
+            "fx": pythonfunc,
             "x0": x0,
             "tol": tol,
             "max_iter": max_iter
@@ -28,7 +30,7 @@ def FPI():
         # return render_template("FixedPointIteration.html", result=response_data)
 
     else:
-        return jsonify({'error': 'Wrong data format'})
+        return render_template("FixedPointIteration.html")
 
 
 if __name__ == '__main__':
