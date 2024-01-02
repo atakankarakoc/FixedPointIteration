@@ -50,7 +50,12 @@ function fetchData(){
           document.getElementById("inputDiv").style.display = "none";
           document.getElementById("resultDiv").style.display = "block";
           console.log(data);
-          document.getElementById("deneme").innerText = data.fx;
+          document.getElementById("fx").innerText = data.fx;
+          document.getElementById("pyfunc").innerText = data.pyfunc;
+          document.getElementById("tol").innerText = data.tol;
+          document.getElementById("max_iter").innerText = data.max_iter;
+          document.getElementById("x0").innerText = data.x0;
+          document.getElementById("root").innerText = data.root;
         })
         .catch(error => {
             console.error('Error:', error);
