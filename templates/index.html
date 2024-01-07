@@ -1,36 +1,34 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
+<html lang="en">    
+	<head>
+		<meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
         <title>{{ title }}</title>
-        <script defer src="//unpkg.com/mathlive"></script>
-        <script src="//unpkg.com/@cortex-js/compute-engine"></script>
-        <script src="plotly-2.27.0.min.js" charset="utf-8"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        <link rel="stylesheet" href="/static/style.css" type="text/css"></link>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/static/style.css" type="text/css">
     </head>
-    <body>
-        <div class="container" id="inputDiv">
-            <div class="row">
-                <div class="card">
-                    <div class="card-header" data-bs-toggle="collapse" data-bs-target="#FixedPointIterationCard">
-                        <h3>Fixed Point Iteration Method</h3> <span class="arrow">&#9664;</span>
-                    </div>
-                    <div class="card-body collapse" id="FixedPointIterationCard">
-                        <form action="/FixedPointIteration" method="POST">
-                            <div class="mb-3">
-                                <label for="FPIFunc" class="form-label">Function</label>
-                                <input type="text" class="form-control" id="FPIFunc" name="FPIFunc" value="x^2-2">
-                                <div id="FPIFunctionDiv" class="form-text">Enter a function to find its roots</div>
-                                <math-field id="MathField">x^2-2</math-field>
+	<body>
+		<div class="container" id="inputDiv">
+			<div class="row">
+				<div class="card">
+					<div class="card-header">
+						<h3>Fixed Point Iteration Method</h3>
+					</div>
+					<div class="card-body" id="FixedPointIterationCard">
+						<form action="/FixedPointIteration" method="POST">
+							<div class="mb-3" style="display: flex; flex-direction: column;">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="FPIFunc" class="form-label">Function</label>
+									    <input type="text" class="form-control" id="FPIFunc" name="FPIFunc" value="x^3+2*x+1">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-text">Enter a function to find its roots</div>
+                                        <math-field id="MathField">x^3+2*x+1</math-field>
+                                    </div>
+                                </div>
                                 <hr>
-                                <div style="display: flex;">
+								<div style="display: flex;">
                                     <div class="EntryData">
                                         <div id="FPIInitialDiv" class="form-text">Initial guess</div>
                                         <input type="text" class="form-control" id="FPIInitial" name="FPIInitialValue">
@@ -44,16 +42,18 @@
                                         <input type="text" class="form-control" id="FPIIter" name="FPIIter" value="100">
                                     </div>
                                 </div>
-                            </div>
-                            <button id="findroot" type="button" class="btn btn-primary" onclick="fetchData()">Find Root</button>
-                        </form>
-                    </div>
-                    <div class="card-footer text-body-secondary">
-                        Finds the root of a function using the fixed point method
-                    </div>
-                </div>
-            </div>
-        </div>
+                                <hr>
+                                <button id="findroot" type="button" class="btn btn-primary" onclick="fetchData()">Find Root</button>
+							</div>
+
+						</form>
+						<div class="card-footer text-body-secondary">
+							Finds the root of a function using the fixed point method
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
         <div class="container" id="resultDiv" style="display: none">
             <div class="card">
                 <div class="card-header">
@@ -87,58 +87,55 @@
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <span class="text-muted">Iteration Count</span>
-                            <span class="value">5</span>
+                            <span class="value" id="count"></span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <span class="text-muted">Error</span>
-                            <span class="value"></span>
+                            <span class="value" id="error"></span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <span class="text-muted">Condition</span>
-                            <span class="value"></span>
+                            <span class="value">No</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="text-muted">Final X Prev</span>
-                            <span class="value"></span>
+                            <span class="text-muted">Final x_prev</span>
+                            <span class="value" id="x_prev"></span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="text-muted">Final X</span>
-                            <span class="value"></span>
+                            <span class="text-muted">Final x_next</span>
+                            <span class="value" id="x_next"></span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="text-muted">Final F Prime(X Prev)</span>
-                            <span class="value"></span>
+                            <span class="text-muted">Final F(x_prev)</span>
+                            <span class="value" id="f_x_prev"></span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="text-muted">Final F(X Prev)</span>
-                            <span class="value"></span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="text-muted">Final F(X)</span>
-                            <span class="value"></span>
+                            <span class="text-muted">Final F(x_next)</span>
+                            <span class="value" id="f_x_next"></span>
                         </li>
                     </ul>
-                    <div id="RootFinder-Plot" style="width: 100%; height: 400px;"></div>
+                    <div id="Plot" class="Plot"></div>
                 </div>
             </div>
             <div class="card">
                 <div class="card-header">
                     <h3>Iterations</h3>
                 </div>
-                <div class="card-body">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Find the tangent line of the function at the initial guess</li>
+                <div class="card-body" id="Iter_result">
+                    <ul class="list-group list-group-flush" style="text-align: center;">
+                        <li class="list-group-item">Transform the f(x)=0 ,x=g(x)</li>
+                        <li class="list-group-item">Substitute 'xn' for 'x' in the function 'g(x)' and set the result equal to 'x(n+1)'.</li>
+                        <li class="list-group-item">Stop if |f(xn)| is less than or equal to the tolerance or
+                            |xn - x(n-1)| is less than or equal to the tolerance.</li>
                     </ul>
-                    <hr>
-                    <p>
-                        <mark>
-                            x<sub>0</sub>
-                        </mark>
-                    </p>
                     <hr>
                 </div>
             </div>
         </div>
-        <script src="/static/script.js"></script>
-    </body>
+		<script src="/static/script.js"></script>
+        <script defer src="//unpkg.com/mathlive"></script>
+        <script src="//unpkg.com/@cortex-js/compute-engine"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	</body>
 </html>

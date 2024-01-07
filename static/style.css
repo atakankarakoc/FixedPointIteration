@@ -1,132 +1,52 @@
-@font-face {
-    font-family: 'Inversionz';
-    src: url('Inversionz.ttf');
-}
-
-a.navbar-brand {
-    font-family: 'Inversionz';
-    font-size: 30px;
-    color: #595959;
-}
-
-a.navbar-brand b {
-    color: #d00000;
-}
-
-a.navbar-brand:hover {
-    color: #d00000;
-}
-
-a.navbar-brand:hover b {
-    color: #595959;
-}
-
-.suggestions-container {
-    position: absolute;
-    border: 1px solid #ddd;
-    border-top: none;
-    z-index: 1000;
-    width: -webkit-fill-available;
-    margin-top: 40px;
-    display: none;
-}
-
-.suggestions-container a {
-    display: block;
-    padding: 10px;
-    text-decoration: none;
-    color: black;
-    background-color: white;
-}
-
-.suggestions-container a:hover {
-    background-color: #f2f2f2;
-}
-
-
 .btn {
     float: right;
-    font-family: 'Inversionz';
+    font-family: 'Helvetica',sans-serif;
     font-size: 20px;
     color: #ffffff;
-    /* background-color: #595959; */
-    background-color: #2573ac;
-    /* border-color: #dcdcdc; */
-    border-color: #83736a;
+    background-color: #53a8b6;
+    border-color: #ffffff;
 }
 .EntryData{
     width: 30%;
     padding: 5px;
 }
-.btn:hover {
-    /* color: #595959; */
-    color: #ffffff;
-    /* background-color: #dcdcdc; */
-    background-color: #3eacd6;
-    /* border-color: #dcdcdc; */
-    border-color: #a19ba7;
+
+button {
+    box-shadow: 0 0 5px cyan,
+    0 0 25px cyan;
 }
 
-.row-centered {
-    text-align: center;
+button:hover {
+    box-shadow: 0 0 5px cyan,
+    0 0 25px cyan, 0 0 50px cyan,
+    0 0 100px cyan, 0 0 200px cyan;
 }
 
 .card {
     margin: 10px;
-    padding: 0px;
+    padding: 0;
     width: calc(100% - 20px);
 }
 
 .card .card-header {
     font-size: 20px;
     color: #ffffff;
-    /* background-color: #595959; */
-    background-color: #2573ac;
-    /* border-color: #dcdcdc; */
-    border-color: #83736a;
-    cursor: pointer;
+    background-color: #53a8b6;
+    border-color: #ffffff;
     user-select: none;
-    -webkit-user-select: none;
 }
 
 .card .card-header h3 {
-    float: left;
+    text-align: center;
 }
 
-.card .card-header .arrow {
-    float: right;
-    font-size: 24px;
-    color: #ffffff;
-    /* background-color: #595959; */
-    background-color: #2573ac;
-    /* border-color: #dcdcdc; */
-    border-color: #83736a;
-}
 
-/* card-body should be horizontally scrollable */
 .card .card-body {
     overflow-x: auto;
 }
 
 .card .card-body ul li span.value {
     overflow-x: auto;
-}
-
-b.red {
-    color: #d00000;
-}
-
-b.green {
-    color: #007000;
-}
-
-b.blue {
-    color: #0000d0;
-}
-
-.bg-red {
-    background-color: #d00000;
-    color: #dcdcdc;
 }
 
 .card .card-footer {
@@ -136,15 +56,21 @@ b.blue {
 .collapse {
     transition: all 0.5s ease;
 }
-
-.equal-height {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    align-items: stretch;
-    justify-content: stretch;
-    padding: 20px;
-}
-
 math-field {
     width: 100%;
+}
+.Plot{
+    width: 100%;
+    height: 500px;
+    text-align: center;
+}
+.text-muted{
+    font-weight: bold;
+    font-size: 1.1em;
+}
+#Iter_result > ul{
+    font-size: 16px;
+}
+body{
+    background: #4a90e2;
 }

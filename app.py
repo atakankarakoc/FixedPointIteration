@@ -1,7 +1,9 @@
+import math
 from flask import Flask
 from flask import render_template
 from flask import request, jsonify
-from sympy import symbols, sympify, nsimplify, S, diff
+from sympy import sympify, nsimplify
+from functions import function_dictionary
 
 app = Flask(__name__)
 
@@ -11,62 +13,82 @@ def index():
     return render_template("index.html",
                            title="Fixed Point Iteration")
 
-@app.route('/FixedPointIteration', methods = ['POST', "GET"])
+@app.route('/FixedPointIteration', methods=['POST',"GET"])
 def FPI():
     if request.is_json:
         data = request.get_json()
+
         fx = data.get("fx")
-        x0 = str(data.get("x0"))
+        x0 = float(data.get("x0"))
         tol = data.get("tol")
-        max_iter = str(data.get("max_iter"))
-        parsed_tol = str(parse_tolerance(tol))
-        python_func = str(sympify(fx))
-        # solution = str(fixed_point_iteration(python_func, x0, parsed_tol, max_iter))
+        max_iter = int(data.get("max_iter"))
+
+        x_prev = x0
+        x_next = 0
+        iter = 0
+        error = []
+        root = []
+        root.append(x_prev)
+        tolerance = parse_tolerance(tol)
+        python_func = str(sympify(fx)).replace(" ", "")
+
+        if "e**x" in python_func:
+            for i in range(max_iter):
+                iter = i
+                try:
+                    x_next = function_dictionary[python_func](x_prev)  # The value of g(xn) is stored in x_next.
+                    root.append(x_next)
+                    modified_expr = python_func.replace('e**x', 'math.exp(x)')  #Replace 'x' with 'math.exp(x)'
+                    f_x_next = eval(modified_expr, {"x": x_next, "math": math}) #f(x_next) is calculated.
+                    error.append(f_x_next)
+                    if abs(f_x_next) <= tolerance or abs(x_next - x_prev) <= tolerance:
+                        break
+                except Exception as e:
+                    print(f"Error: {e}")
+                    return jsonify({"Error": str(e)})
+                x_prev = x_next
+        else:
+            for i in range(max_iter):
+                iter = i
+                try:
+                    x_next = function_dictionary[python_func](x_prev)  # The value of g(xn) is stored in x_next.
+                    root.append(x_next)
+                    f_x_next = eval(python_func, {"x": x_next})  #f(x_next) is calculated.
+                    error.append(f_x_next)
+                    if abs(f_x_next) <= tolerance or abs(x_next - x_prev) <= tolerance:
+                        break
+                except Exception as e:
+                    print(f"Error: {e}")
+                    return jsonify({"Error": str(e)})
+                x_prev = x_next
+
         response_data = {
-            "fx": str(fx),
+            "fx": fx,
+            "pyfunc": python_func,
             "x0": x0,
             "tol": tol,
             "max_iter": max_iter,
-            "pyfunc": python_func
+            "root": x_next,
+            "count": (iter + 1),
+            "error": error[-1],
+            "x_prev": x_prev,
+            "x_next": x_next,
+            "f_x_prev": error[-2],
+            "f_x_next": error[-1],
+            "roots": root,
+            "f_result": error
         }
         return jsonify(response_data)
-        # return render_template("FixedPointIteration.html", result=response_data)
-
     else:
-        return render_template("FixedPointIteration.html")
+        return jsonify({"error": "Invalid JSON format in the request"}), 400
 
 def parse_tolerance(tol):
     try:
-        tol_sympy = nsimplify(S(tol))
+        tol_sympy = nsimplify(tol)
         return float(tol_sympy)
-    except ValueError:
-        return None 
-    
-# def fixed_point_iteration(fx, x0, tol, max_iter):
-#     x = symbols('x')
-#     g_x = sympify(fx)
-#     g_prime = diff(g_x, x)
+    except ValueError as v:
+        return v
 
-#     iteration = 0
-#     x_n = x0
-
-#     while iteration < max_iter:
-#         try:
-#             x_next = x_n - g_x.subs(x, x_n) / g_prime.subs(x, x_n)
-#         except ZeroDivisionError:
-#             return None  # Division by zero, convergence not possible
-
-#         if abs(x_next - x_n) < tol:
-#             return x_next
-
-#         x_n = x_next
-#         iteration += 1
-
-#     return None 
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-x^2 - x - 2 = 0
-x^2 + 2 = g(x)
-sqrt(x + 2) = g(x) 
