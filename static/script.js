@@ -174,11 +174,8 @@ function fetchData(){
 }
 
 
-
 const mathField = document.getElementById('MathField');
 const FPIFunc = document.getElementById('FPIFunc');
-
-
 
 //The content written in the math-field is also written to FPIFunc.
 FPIFunc.addEventListener("input", () => {
@@ -216,30 +213,3 @@ function transformExpression(expression) {
 
     return expression;
 }
-
-
-
-
-
-
-// mathField.addEventListener("input", () => {
-//     const FPIFunc = document.getElementById("FPIFunc");
-//     FPIFunc.value = document.getElementById('MathField');
-// });
-// FPIFunc.addEventListener("input", () => {
-//     const mathField = document.getElementById('MathField');
-//     mathField.value = document.getElementById('FPIFunc').value;
-// });
-
-// // Fixed point iterationa tıklayınca okun yönünün aşağıya doğru şekilde değişmesi
-// document.querySelectorAll('.card-header').forEach((cardHeader) => {
-//     cardHeader.addEventListener('click', () => {
-//         const arrow = cardHeader.querySelector('.arrow');
-//         // const cardBody = cardHeader.parentNode.querySelector('.card-body');
-//         if (arrow.textContent === '\u25C0') {
-//             arrow.textContent = '\u25BC';
-//         } else {
-//             arrow.textContent = '\u25C0';
-//         }
-//     });
-// });
